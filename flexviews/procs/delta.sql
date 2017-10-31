@@ -124,9 +124,9 @@ IF NOT flexviews.has_aggregates(v_mview_id) THEN
       END IF;
 
       SET @v_sql = v_sql;
-      PREPARE stmt from @v_sql;
-      EXECUTE stmt; 
-      DEALLOCATE PREPARE stmt;
+      PREPARE insert_or_delete_stmt from @v_sql;
+      EXECUTE insert_or_delete_stmt; 
+      DEALLOCATE PREPARE insert_or_delete_stmt;
     END LOOP;
 
   END;
