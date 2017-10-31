@@ -626,6 +626,7 @@ EOREGEX
 		mysqli_select_db($this->dest,$this->mvlogDB) or die1('COULD NOT CHANGE DATABASE TO:' . $this->mvlogDB . "\n");
 		my_mysql_query("commit;", $this->dest);
 		$stmt = my_mysql_query("SET SQL_MODE=STRICT_ALL_TABLES",$this->dest);
+		$stmt = my_mysql_query("SET @SQL_LOG_BIN=0", $this->dest);
 		if(!$stmt) die1(mysqli_error($this->dest));
 		my_mysql_query("BEGIN;", $this->dest) or die1(mysqli_error($this->dest));
 
