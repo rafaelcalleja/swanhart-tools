@@ -193,12 +193,12 @@ worker:BEGIN
 					SET @v_sql := v_sql_text;
         END IF;
 
-        PREPARE stmt FROM @v_sql;
+        PREPARE v_stmt FROM @v_sql;
         IF(@errno IS NULL) THEN
 					-- lock the query for exec
 					SELECT * from q where q_id = v_q_id FOR UPDATE;
-        	EXECUTE stmt;
-					DEALLOCATE PREPARE stmt;
+        	EXECUTE v_stmt;
+					DEALLOCATE PREPARE v_stmt;
 				END IF;
 
         UPDATE q
@@ -270,14 +270,14 @@ BEGIN
 	ROLLBACK;
 
   SET @v_sql := CONCAT('SELECT * from rs_', v_q_id);
-  PREPARE stmt from @v_sql;
-  EXECUTE stmt;
-	DEALLOCATE PREPARE stmt;
+  PREPARE rs_stmt from @v_sql;
+  EXECUTE rs_stmt;
+	DEALLOCATE PREPARE rs_stmt;
 
 	SET @v_sql := CONCAT('DROP TABLE rs_', v_q_id);
-  PREPARE stmt from @v_sql;
-  EXECUTE stmt;
-	DEALLOCATE PREPARE stmt;
+  PREPARE drop_stmt from @v_sql;
+  EXECUTE drop_stmt;
+	DEALLOCATE PREPARE drop_stmt;
 
 END;;
 CREATE  PROCEDURE async.queue(IN v_sql_text LONGTEXT)
