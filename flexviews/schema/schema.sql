@@ -55,7 +55,7 @@ DEFAULT CHARSET=utf8;
 CREATE TABLE IF NOT EXISTS flexviews.refresh_step_info(
   mview_id int(11) not null PRIMARY KEY,
   last_step varchar(255) not null, 
-  last_step_at TIMESTAMP NOT NULL
+  last_step_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) DEFAULT CHARSET=UTF8
 ENGINE=MYISAM;
 
