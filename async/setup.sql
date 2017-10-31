@@ -28,7 +28,7 @@ CREATE DATABASE IF NOT EXISTS async;
 
 USE async;
 
-CREATE DEFINER=root@localhost PROCEDURE async.check_reqs()
+CREATE  PROCEDURE async.check_reqs()
 READS SQL DATA
 SQL SECURITY DEFINER
 BEGIN
@@ -44,7 +44,7 @@ select 'Creating setup procedure' as message;
 
 DROP PROCEDURE IF EXISTS setup;;
 
-CREATE DEFINER=root@localhost PROCEDURE async.setup()
+CREATE  PROCEDURE async.setup()
 MODIFIES SQL DATA
 SQL SECURITY DEFINER
 BEGIN
@@ -75,7 +75,7 @@ END;;
 
 DROP PROCEDURE IF EXISTS async.run_worker;;
 
-CREATE DEFINER=root@localhost PROCEDURE async.worker()
+CREATE  PROCEDURE async.worker()
 MODIFIES SQL DATA
 SQL SECURITY DEFINER
 worker:BEGIN
@@ -229,14 +229,14 @@ worker:BEGIN
   
 END;;
 
-CREATE DEFINER=root@localhost PROCEDURE async.check(IN v_q_id BIGINT)
+CREATE  PROCEDURE async.check(IN v_q_id BIGINT)
 MODIFIES SQL DATA
 SQL SECURITY DEFINER
 BEGIN
 	SELECT * from q where q_id = v_q_id;	
 END;;
 
-CREATE DEFINER=root@localhost PROCEDURE async.wait(IN v_q_id BIGINT)
+CREATE  PROCEDURE async.wait(IN v_q_id BIGINT)
 MODIFIES SQL DATA
 SQL SECURITY DEFINER
 BEGIN
@@ -280,7 +280,7 @@ BEGIN
 	DEALLOCATE PREPARE stmt;
 
 END;;
-CREATE DEFINER=root@localhost PROCEDURE async.queue(IN v_sql_text LONGTEXT)
+CREATE  PROCEDURE async.queue(IN v_sql_text LONGTEXT)
 MODIFIES SQL DATA
 SQL SECURITY DEFINER
 BEGIN
@@ -295,7 +295,7 @@ BEGIN
 	SELECT @query_number as QUERY_NUMBER;
 END;;
 
-CREATE DEFINER=root@localhost PROCEDURE async.wait_list(INOUT v_list TEXT)
+CREATE  PROCEDURE async.wait_list(INOUT v_list TEXT)
 MODIFIES SQL DATA
 wait_list:BEGIN
   IF(v_list = '' OR v_list IS NULL) THEN
@@ -322,7 +322,7 @@ wait_list:BEGIN
   SET v_list := '';
 END;;
 
-CREATE DEFINER=root@localhost PROCEDURE async.wait_all()
+CREATE  PROCEDURE async.wait_all()
 MODIFIES SQL DATA
 CALL wait_list(@query_list);;
 
