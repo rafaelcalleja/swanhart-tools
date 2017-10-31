@@ -40,7 +40,7 @@ DROP FUNCTION IF EXISTS flexviews.get_mvlog;;
 */
 
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_mvlog (
+CREATE  FUNCTION flexviews.get_mvlog (
   v_table_schema TEXT character set utf8,
   v_table_name TEXT character set utf8
 )

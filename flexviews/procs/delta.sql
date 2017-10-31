@@ -22,7 +22,7 @@ DELIMITER ;;
 
 
 DROP PROCEDURE IF EXISTS flexviews.apply_delta;;
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.apply_delta(
+CREATE  PROCEDURE flexviews.apply_delta(
 IN v_mview_id INT,
 IN v_until_uow_id BIGINT
 )
@@ -269,7 +269,7 @@ END IF;
 END;;
 
 DROP FUNCTION IF EXISTS flexviews.get_delta_where;;
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_delta_where(
+CREATE  FUNCTION flexviews.get_delta_where(
 v_mview_id INT,
 v_depth TINYINT
 )  RETURNS TEXT CHARACTER SET UTF8
@@ -332,7 +332,7 @@ RETURN v_where_clause;
 END;;
 
 DROP PROCEDURE IF EXISTS flexviews.execute_refresh_step;;
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.execute_refresh_step (
+CREATE  PROCEDURE flexviews.execute_refresh_step (
 IN v_mview_id INT, 
 IN v_depth INT, 
 IN v_method TINYINT,
@@ -401,7 +401,7 @@ call flexviews.update_refresh_step_info(v_mview_id,'EXECUTE_REFRESH_STEP_END');
 END;;
 
 DROP PROCEDURE IF EXISTS flexviews.execute_refresh;;
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.execute_refresh(
+CREATE  PROCEDURE flexviews.execute_refresh(
 IN v_mview_id INT,
 IN v_start_uow_id BIGINT, 
 IN v_until_uow_id BIGINT,
@@ -626,7 +626,7 @@ END;;
 
 DROP FUNCTION IF EXISTS `get_delta_from` ;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION get_delta_from (
+CREATE  FUNCTION get_delta_from (
   v_depth INT
 )  RETURNS TEXT CHARACTER SET UTF8
     READS SQL DATA
@@ -693,7 +693,7 @@ END ;;
 
 DROP FUNCTION IF EXISTS `get_delta_least_uowid` ;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION get_delta_least_uowid (
+CREATE  FUNCTION get_delta_least_uowid (
   v_depth INT
 )  RETURNS TEXT CHARACTER SET UTF8
     READS SQL DATA
@@ -743,7 +743,7 @@ END ;;
 
 DROP FUNCTION IF EXISTS `get_delta_least_gsn` ;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION get_delta_least_gsn (
+CREATE  FUNCTION get_delta_least_gsn (
   v_depth INT
 )  RETURNS TEXT CHARACTER SET UTF8
     READS SQL DATA
@@ -795,7 +795,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS `get_delta_aliases`;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION `get_delta_aliases`(  
+CREATE  FUNCTION `get_delta_aliases`(  
 v_mview_id INT, 
 v_prefix TEXT CHARACTER SET UTF8, 
 v_only_groupby BOOLEAN
@@ -860,7 +860,7 @@ END ;;
 
 DROP FUNCTION IF EXISTS flexviews.get_delta_select;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_delta_select(  
+CREATE  FUNCTION flexviews.get_delta_select(  
 v_mview_id INT,
 v_method INT,
 v_mview_table_id INT )
@@ -944,7 +944,7 @@ END ;;
 
 DROP FUNCTION IF EXISTS `has_aggregates`;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION  `has_aggregates`(  
+CREATE  FUNCTION  `has_aggregates`(  
 v_mview_id INT
 )
 RETURNS BOOLEAN
@@ -965,7 +965,7 @@ END ;;
 
 DROP FUNCTION IF EXISTS flexviews.get_delta_groupby;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_delta_groupby(
+CREATE  FUNCTION flexviews.get_delta_groupby(
   v_mview_id INT
 )  RETURNS TEXT CHARACTER SET UTF8
     READS SQL DATA
@@ -1013,7 +1013,7 @@ END ;;
 
 DROP FUNCTION IF EXISTS get_insert;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION  get_insert (
+CREATE  FUNCTION  get_insert (
   v_mview_id INT,
   v_select_stmt TEXT CHARACTER SET UTF8
 )  RETURNS TEXT CHARACTER SET UTF8
@@ -1119,7 +1119,7 @@ END;;
 
 DROP PROCEDURE IF EXISTS flexviews.ensure_validity;;
 
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.ensure_validity(
+CREATE  PROCEDURE flexviews.ensure_validity(
 IN v_id INT
 ) 
 BEGIN
@@ -1213,7 +1213,7 @@ END LOOP;
 END;;
 
 DROP PROCEDURE IF EXISTS flexviews.rlog;;
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.rlog(v_message TEXT character set utf8)
+CREATE  PROCEDURE flexviews.rlog(v_message TEXT character set utf8)
 BEGIN
 DECLARE v_tstamp DATETIME;
   IF @fv_rlog = TRUE THEN
@@ -1224,7 +1224,7 @@ drop procedure if exists process_rlog;;
 
 DROP FUNCTION IF EXISTS flexviews.get_child_select;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_child_select(  
+CREATE  FUNCTION flexviews.get_child_select(  
 v_mview_id INT, 
 v_alias TEXT CHARACTER SET UTF8
 )
@@ -1291,7 +1291,7 @@ END ;;
 
 DROP FUNCTION IF EXISTS `get_delta_join`;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION `get_delta_join`(  
+CREATE  FUNCTION `get_delta_join`(  
 v_mview_id INT 
 )
    RETURNS TEXT CHARACTER SET UTF8

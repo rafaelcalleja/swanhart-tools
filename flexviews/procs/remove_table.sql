@@ -42,7 +42,7 @@ DROP PROCEDURE IF EXISTS flexviews.`remove_table` ;;
  *     call flexviews.remove_table(@mv_id, 'an_alias'); #remove the table we just added
 ******
 */
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE `remove_table`(
+CREATE  PROCEDURE `remove_table`(
   IN v_mview_id INT,
   IN v_mview_table_schema TEXT character set utf8,
   IN v_mview_table_name TEXT character set utf8

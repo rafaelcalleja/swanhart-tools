@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.`get_keys` ;;
 
-CREATE DEFINER=`flexviews`@`localhost` FUNCTION flexviews.`get_keys`(v_mview_id INT) RETURNS TEXT CHARSET UTF8
+CREATE  FUNCTION flexviews.`get_keys`(v_mview_id INT) RETURNS TEXT CHARSET UTF8
 READS SQL DATA
 BEGIN
   DECLARE v_done boolean DEFAULT FALSE;

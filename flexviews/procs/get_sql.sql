@@ -37,7 +37,7 @@ DROP FUNCTION IF EXISTS flexviews.get_sql;;
  *     call flexviews.get_sql(flexviews.get_id('test','test_mv'));
 ******
 */
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_sql (
+CREATE  FUNCTION flexviews.get_sql (
   v_mview_id INT
 )
 RETURNS TEXT character set utf8

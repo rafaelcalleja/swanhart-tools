@@ -21,7 +21,7 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS update_refresh_step_info;
 
 
-CREATE DEFINER=flexviews@localhost PROCEDURE  `update_refresh_step_info`(
+CREATE  PROCEDURE  `update_refresh_step_info`(
   IN v_mview_id INT,
   IN v_last_step VARCHAR(255)
 )

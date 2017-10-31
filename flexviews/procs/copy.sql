@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP PROCEDURE IF EXISTS flexviews.copy;;
 
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.copy(
+CREATE  PROCEDURE flexviews.copy(
   IN v_mview_id INT,
   IN v_schema VARCHAR(64) CHARACTER SET UTF8, 
   IN v_table VARCHAR(64) CHARACTER SET UTF8

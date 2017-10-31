@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP PROCEDURE IF EXISTS flexviews.`create_child_views` ;;
 
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE flexviews.`create_child_views`(IN v_mview_id INT) 
+CREATE  PROCEDURE flexviews.`create_child_views`(IN v_mview_id INT) 
 BEGIN
   DECLARE v_new_mview_id INT;
   DECLARE v_needs_dependent_view BOOLEAN DEFAULT FALSE;

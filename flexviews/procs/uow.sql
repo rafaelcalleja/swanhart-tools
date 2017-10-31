@@ -22,7 +22,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.uow_from_dtime;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.uow_from_dtime(
+CREATE  FUNCTION flexviews.uow_from_dtime(
 v_dtime DATETIME
 ) RETURNS BIGINT
 READS SQL DATA
@@ -42,7 +42,7 @@ END;;
 
 DROP PROCEDURE IF EXISTS flexviews.uow_start;;
 
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.uow_start(OUT v_uow_id BIGINT)
+CREATE  PROCEDURE flexviews.uow_start(OUT v_uow_id BIGINT)
 BEGIN
 DECLARE v_retry BOOLEAN DEFAULT FALSE;
 startUOW:WHILE (1) DO
@@ -71,7 +71,7 @@ END ;;
 
 DROP PROCEDURE IF EXISTS flexviews.uow_end;;
 
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.uow_end(IN v_uow_id BIGINT)
+CREATE  PROCEDURE flexviews.uow_end(IN v_uow_id BIGINT)
   CONTAINS SQL
 BEGIN END ;;
 
@@ -84,7 +84,7 @@ END;;
 
 DROP PROCEDURE IF EXISTS flexviews.uow_execute;;
 
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.uow_execute(IN v_sql TEXT CHARACTER SET UTF8, OUT v_uow_id BIGINT)
+CREATE  PROCEDURE flexviews.uow_execute(IN v_sql TEXT CHARACTER SET UTF8, OUT v_uow_id BIGINT)
 BEGIN
   DECLARE v_signal_id INT;
   START TRANSACTION;

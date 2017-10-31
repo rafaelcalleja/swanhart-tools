@@ -57,7 +57,7 @@ DROP PROCEDURE IF EXISTS flexviews.refresh ;;
  *   The external binary log consumer MUST BE RUNNING in order to COMPUTE changes to views!
 ******
 */
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.refresh(
+CREATE  PROCEDURE flexviews.refresh(
   IN v_mview_id INT,
   IN v_mode ENUM('AUTO','COMPLETE','FULL','BOTH','COMPUTE','APPLY'),
   IN v_uow_id BIGINT 

@@ -42,7 +42,7 @@ DROP PROCEDURE IF EXISTS flexviews.disable;;
 ******
 */
 
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE flexviews.`disable`(
+CREATE  PROCEDURE flexviews.`disable`(
   IN v_mview_id INT UNSIGNED
 )
   MODIFIES SQL DATA

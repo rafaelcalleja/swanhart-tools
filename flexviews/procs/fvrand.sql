@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.fvrand;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.fvrand (
+CREATE  FUNCTION flexviews.fvrand (
   v_low INT,
   v_high INT
 )

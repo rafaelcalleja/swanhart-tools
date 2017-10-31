@@ -38,7 +38,7 @@ DROP FUNCTION IF EXISTS flexviews.get_id;;
 */
 
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_id (
+CREATE  FUNCTION flexviews.get_id (
   v_mview_schema TEXT CHARACTER SET UTF8,
   v_mview_name TEXT CHARACTER SET UTF8
 )

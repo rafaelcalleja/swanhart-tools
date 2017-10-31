@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.get_where;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_where(v_mview_id INT)
+CREATE  FUNCTION flexviews.get_where(v_mview_id INT)
 RETURNS TEXT character set utf8
 READS SQL DATA
 BEGIN

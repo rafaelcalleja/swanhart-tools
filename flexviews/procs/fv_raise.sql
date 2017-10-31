@@ -55,7 +55,7 @@ DROP PROCEDURE IF EXISTS `flexviews`.`fv_raise`;;
  *    CALL flexviews.fv_raise('warning', 100, 'Run SHOW WARNINGS to see this message');
 ******
 */
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE `flexviews`.`fv_raise`( 
+CREATE  PROCEDURE `flexviews`.`fv_raise`( 
 	IN `in_level` ENUM('WARNING', 'ERROR'),
 	IN `in_mysql_errno` SMALLINT UNSIGNED,
 	IN `in_message_text` VARCHAR(128) CHARACTER SET utf8

@@ -44,7 +44,7 @@ DROP PROCEDURE IF EXISTS `rename`;;
  *     call flexviews.rename(flexviews.get_id('test','mv_example'), 'new_schema', 'and_new_table')
 ******
 */
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE `rename`(
+CREATE  PROCEDURE `rename`(
   IN v_mview_id INT,
   IN v_mview_schema_new TEXT CHARACTER SET UTF8,
   IN v_mview_name_new TEXT CHARACTER SET UTF8

@@ -46,7 +46,7 @@ DROP PROCEDURE IF EXISTS flexviews.`create_mvlog` ;;
  *       call flexviews.create_mvlog('test', 'my_table');
 ******
 */
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE flexviews.`create_mvlog`(
+CREATE  PROCEDURE flexviews.`create_mvlog`(
    IN v_schema_name TINYTEXT CHARACTER SET UTF8,
    IN v_table_name TINYTEXT CHARACTER SET UTF8 
 )

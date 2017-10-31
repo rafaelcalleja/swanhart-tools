@@ -21,7 +21,7 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS star_transform;
 
 
-CREATE DEFINER=flexviews@localhost PROCEDURE  `star_transform`(
+CREATE  PROCEDURE  `star_transform`(
   IN v_mview_id INT
 )
 body: BEGIN

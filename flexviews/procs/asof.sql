@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP PROCEDURE IF EXISTS flexviews.asof;;
 
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.asof(
+CREATE  PROCEDURE flexviews.asof(
   IN v_mview_id INT,
   IN v_when DATETIME 
 )

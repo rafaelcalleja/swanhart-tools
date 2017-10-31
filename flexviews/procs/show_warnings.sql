@@ -36,7 +36,7 @@ DROP PROCEDURE IF EXISTS `flexviews`.`show_warnings`;;
  *    CALL flexviews.show_warnings();
 ******
 */
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE `flexviews`.`show_warnings`()
+CREATE  PROCEDURE `flexviews`.`show_warnings`()
 	CONTAINS SQL
 	COMMENT 'If SIGNAL is not supported, returns Flexviews errors'
 BEGIN

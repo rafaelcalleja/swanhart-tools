@@ -42,7 +42,7 @@ DROP PROCEDURE IF EXISTS `flexviews`.`set_definition`;;
  *     call flexviews.set_definition(flexviews.get_id('test','mv_example'), 'SELECT * from my_table where c1=1')
 ******
 */
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE `flexviews`.`set_definition`(
+CREATE  PROCEDURE `flexviews`.`set_definition`(
   IN v_mview_id INT,
   IN v_definition_sql TEXT CHARACTER SET UTF8
 )

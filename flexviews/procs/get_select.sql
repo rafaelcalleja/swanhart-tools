@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.`get_select`;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.`get_select`(  v_mview_id INT, v_mode TINYTEXT CHARACTER SET UTF8, v_prefix TINYTEXT CHARACTER SET UTF8) RETURNS TEXT CHARSET latin1
+CREATE  FUNCTION flexviews.`get_select`(  v_mview_id INT, v_mode TINYTEXT CHARACTER SET UTF8, v_prefix TINYTEXT CHARACTER SET UTF8) RETURNS TEXT CHARSET latin1
     READS SQL DATA
 BEGIN  
 DECLARE v_done boolean DEFAULT FALSE;  

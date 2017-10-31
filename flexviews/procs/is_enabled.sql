@@ -38,7 +38,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.is_enabled;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.is_enabled(v_mview_id INT) 
+CREATE  FUNCTION flexviews.is_enabled(v_mview_id INT) 
 RETURNS BOOLEAN
 NOT DETERMINISTIC
 READS SQL DATA

@@ -46,7 +46,7 @@ DROP PROCEDURE IF EXISTS enable;;
 */
 
 
-CREATE DEFINER=flexviews@localhost PROCEDURE  `enable`(
+CREATE  PROCEDURE  `enable`(
   IN v_mview_id INT
 )
 body: BEGIN

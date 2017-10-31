@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.get_delta_groupby;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.get_delta_groupby(
+CREATE  FUNCTION flexviews.get_delta_groupby(
   v_mview_id INT
 ) RETURNS TEXT CHARACTER SET UTF8
     READS SQL DATA

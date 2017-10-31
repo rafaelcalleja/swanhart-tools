@@ -59,7 +59,7 @@ DROP PROCEDURE IF EXISTS flexviews.refresh_all ;;
  *   FlexCDC MUST BE RUNNING in order to COMPUTE changes to views!
 ******
 */
-CREATE DEFINER=flexviews@localhost PROCEDURE flexviews.refresh_all(
+CREATE  PROCEDURE flexviews.refresh_all(
   IN v_mode ENUM('COMPLETE', 'COMPUTE', 'APPLY', 'BOTH'),
   IN v_uow_id BIGINT UNSIGNED
 )

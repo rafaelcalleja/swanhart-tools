@@ -52,7 +52,7 @@ DROP PROCEDURE IF EXISTS flexviews.create;;
 ******
 */
 
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE flexviews.`create`(
+CREATE  PROCEDURE flexviews.`create`(
   IN v_mview_schema TEXT CHARACTER SET UTF8,
   IN v_mview_name TEXT CHARACTER SET UTF8,
   IN v_mview_refresh_type ENUM('INCREMENTAL','COMPLETE')

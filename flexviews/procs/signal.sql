@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP PROCEDURE IF EXISTS flexviews.`signal`;;
 
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE flexviews.`signal`( 
+CREATE  PROCEDURE flexviews.`signal`( 
   IN in_errortext TINYTEXT CHARACTER SET UTF8
 )
    CONTAINS SQL

@@ -26,7 +26,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.`get_percentile`;;
 
-CREATE DEFINER=flexviews@localhost FUNCTION flexviews.`get_percentile`(
+CREATE  FUNCTION flexviews.`get_percentile`(
     v_mview_expression TEXT character set utf8,
     v_percentile TINYINT UNSIGNED
   )

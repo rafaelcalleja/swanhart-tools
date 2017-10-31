@@ -45,7 +45,7 @@ DROP PROCEDURE IF EXISTS flexviews.drop;;
 ******
 */
 
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE flexviews.`drop`(
+CREATE  PROCEDURE flexviews.`drop`(
   IN v_mview_id INT UNSIGNED
 )
   MODIFIES SQL DATA

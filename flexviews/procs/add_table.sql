@@ -49,7 +49,7 @@ DROP PROCEDURE IF EXISTS flexviews.`add_table` ;;
  *     call flexviews.add_table(@mv_id, 'schema', 'table2', 'a2', 'ON an_alias.c1 = a2.c1');
 ******
 */
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE `flexviews`.`add_table`(
+CREATE  PROCEDURE `flexviews`.`add_table`(
   IN v_mview_id INT,
   IN v_mview_table_schema TEXT CHARACTER SET UTF8,
   IN v_mview_table_name TEXT CHARACTER SET UTF8, 

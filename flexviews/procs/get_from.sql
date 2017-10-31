@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS flexviews.get_from ;;
 
-CREATE DEFINER=`flexviews`@`localhost`FUNCTION flexviews.`get_from`(
+CREATE FUNCTION flexviews.`get_from`(
   v_mview_id INT,
   v_join_type TEXT character set utf8,
   v_table_suffix TEXT character set utf8

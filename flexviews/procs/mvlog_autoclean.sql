@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP PROCEDURE IF EXISTS `flexviews`.`mview_mvlog_autoclean`;;
 
-CREATE DEFINER=flexviews@localhost PROCEDURE `flexviews`.`mview_mvlog_autoclean`() 
+CREATE  PROCEDURE `flexviews`.`mview_mvlog_autoclean`() 
 BEGIN
   DECLARE v_mview_tstamp DATETIME;
   DECLARE v_mvlog_name VARCHAR(64);

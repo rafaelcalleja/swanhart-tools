@@ -20,7 +20,7 @@ DELIMITER ;;
 
 DROP PROCEDURE IF EXISTS `mview_refresh_complete`;;
 
-CREATE DEFINER=`flexviews`@`localhost` PROCEDURE `mview_refresh_complete`(
+CREATE  PROCEDURE `mview_refresh_complete`(
   IN v_mview_id INT
 )
 BEGIN
