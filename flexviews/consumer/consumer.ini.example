@@ -92,6 +92,8 @@ failure_email_address=root@localhost
 ;Of course, if you want more than one plugin, each MUST have a unique name (again this is the CLASS name in the file(s) loaded above)
 ;plugin_order=Class1,Class2
 
+excluded_transactions=flexviews.binlog_consumer_status,flexviews.mview_uow,flexviews.mvlogs
+
 ;The SOURCE is where the change logs are read from.  This does not have to be the same as the local machine.
 ;this user requires "grant replication client,replication slave"
 [source]

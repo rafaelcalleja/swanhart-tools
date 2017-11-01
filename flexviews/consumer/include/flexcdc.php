@@ -193,6 +193,10 @@ EOREGEX
 
 	protected $hasStopNever = false;
 
+	protected $excludeNextTransaction = false;
+
+	protected $excludedTransactions = [];
+
 	public function get_source($new = false) {
 		if($new) return $this->new_connection(SOURCE);
 		return $this->source;
@@ -320,6 +324,13 @@ EOREGEX
 		if(!$no_connect) {	
 			$this->source = $this->get_source(true);
 			$this->dest = $this->get_dest(true);
+		}
+
+		if(!empty($settings['flexcdc']['excluded_transactions'])) {
+			$vals = explode(',', $settings['flexcdc']['excluded_transactions']);
+			foreach($vals as $val) {
+				$this->excludedTransactions[] = trim($val);
+			}
 		}
 
 		$this->settings = $settings;
@@ -626,7 +637,6 @@ EOREGEX
 		mysqli_select_db($this->dest,$this->mvlogDB) or die1('COULD NOT CHANGE DATABASE TO:' . $this->mvlogDB . "\n");
 		my_mysql_query("commit;", $this->dest);
 		$stmt = my_mysql_query("SET SQL_MODE=STRICT_ALL_TABLES",$this->dest);
-		$stmt = my_mysql_query("SET @SQL_LOG_BIN=0", $this->dest);
 		if(!$stmt) die1(mysqli_error($this->dest));
 		my_mysql_query("BEGIN;", $this->dest) or die1(mysqli_error($this->dest));
 
@@ -739,8 +749,35 @@ EOREGEX
 		
 	}
 
+	private function isAnExcludeTransaction(): bool
+	{
+		$execCmdLine = sprintf("%s --base64-output=decode-rows -v -R --start-position=%d %s", $this->cmdLine,  $this->binlogPosition, $this->logName);
+
+		$dest = popen($execCmdLine, "r");
+
+		if (!$dest) {
+			die1('Could not read binary log using mysqlbinlog\n');
+		}
+
+		while (($buffer = fgets($dest)) !== false) {
+			if (preg_match('/### (UPDATE|INSERT|DELETE)(?: INTO| FROM| )\s*([^.]+)\.(.*$)/', $buffer, $matches)) {
+				$schema = preg_replace("/[^A-Za-z0-9 ]/", '', $matches[2]);
+				$table = preg_replace("/[^A-Za-z0-9\-\_]/", '', $matches[3]);
+				$tableName = "{$schema}.{$table}";
+				fclose($dest);
+
+				return in_array($tableName, $this->excludedTransactions);
+			}
+		}
+	}
+
 	/* Called when a new transaction starts*/
 	function start_transaction() {
+		if (true === $this->isAnExcludeTransaction()) {
+			$this->excludeNextTransaction = true;
+			return;
+		}
+
 		my_mysql_query("START TRANSACTION", $this->dest) or die1("COULD NOT START TRANSACTION;\n" . mysqli_error($this->dest));
         	$this->set_capture_pos();
 		$sql = sprintf("INSERT INTO `" . $this->mview_uow . "` values(NULL,str_to_date('%s', '%%y%%m%%d %%H:%%i:%%s'),%d);",rtrim($this->timeStamp),$this->gsn_hwm);
@@ -764,6 +801,13 @@ EOREGEX
     
     /* Called when a transaction commits */
 	function commit_transaction() {
+
+		if (true === $this->excludeNextTransaction) {
+			$this->inserts = $this->deletes = $this->tables = array();
+			$this->uow_id = null;
+			$this->excludeNextTransaction = false;
+			return;
+		}
 
 		//Handle bulk insertion of changes
 		if(!empty($this->inserts) || !empty($this->deletes)) {
@@ -789,6 +833,7 @@ EOREGEX
 	/* Called when a transaction rolls back */
 	function rollback_transaction() {
 		$this->inserts = $this->deletes = $this->tables = array();
+		$this->excludeNextTransaction = false;
 		my_mysql_query("ROLLBACK", $this->dest) or die1("COULD NOT ROLLBACK TRANSACTION;\n" . mysqli_error($this->dest));
 		#update the capture position and commit, because we don't want to keep reading a truncated log
 		$this->set_capture_pos();
@@ -1265,14 +1310,17 @@ EOREGEX
 			$matches = array();
 
 			#Control information from MySQLbinlog is prefixed with a hash comment.
-			if($prefix[0] == "#") {
+			if(false === empty($prefix) && $prefix[0] == "#") {
 				$binlogStatement = "";
 				if (preg_match('/^#([0-9]+\s+[0-9:]+)\s+server\s+id\s+([0-9]+)\s+end_log_pos ([0-9]+)(.*)/', $line,$matches)) {
 					$this->timeStamp = $matches[1];
+					$lastBinlogPoistion = $this->binlogPosition;
 					$this->binlogPosition = $matches[3];
 					$this->binlogServerId = $matches[2];
-					if($at = strpos($line, 'Rotate to ')) {
+					if ($at = strpos($line, 'Rotate to ')) {
+						$this->binlogPosition = $lastBinlogPoistion;
 						$this->set_capture_pos(true);
+						$this->binlogPosition = $matches[3];
 						$substr = substr($line, $at);
 						$vals = explode(' ', $substr);
 						$this->logName = $vals[2];
