@@ -761,7 +761,7 @@ EOREGEX
 
 		while (($buffer = fgets($dest)) !== false) {
 			if (preg_match('/### (UPDATE|INSERT|DELETE)(?: INTO| FROM| )\s*([^.]+)\.(.*$)/', $buffer, $matches)) {
-				$schema = preg_replace("/[^A-Za-z0-9 ]/", '', $matches[2]);
+				$schema = preg_replace("/[^A-Za-z0-9\-\_]/", '', $matches[2]);
 				$table = preg_replace("/[^A-Za-z0-9\-\_]/", '', $matches[3]);
 				$tableName = "{$schema}.{$table}";
 				fclose($dest);
